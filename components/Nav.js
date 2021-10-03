@@ -5,7 +5,8 @@ function Nav(props) {
   const navStyles = `
   flex 
   flex-nowrap 
-  px-10 
+  px-10
+  pb-6 
   space-x-10
   overflow-x-scroll
   scrollbar-hide

@@ -4,9 +4,8 @@ import Nav from "../components/Nav";
 import Gallery from "../components/Gallery";
 import requests from "../utils/requests";
 
-export default function Home({ response }) {
-  const results = response.results;
-  console.log("results", results);
+export default function Home({ API_response }) {
+  const movieData = API_response.results;
   return (
     <div>
       <Head>
@@ -21,7 +20,7 @@ export default function Home({ response }) {
       <Nav />
 
       {/* Gallery */}
-      <Gallery results={results} />
+      <Gallery movieData={movieData} />
     </div>
   );
 }
@@ -35,7 +34,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      response: response,
+      API_response: response,
     },
   };
 }

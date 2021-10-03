@@ -1,7 +1,8 @@
 import requests from "../utils/requests";
+import { useRouter } from "next/router";
 
 function Nav(props) {
-  const navClassNames = `
+  const navStyles = `
   flex 
   flex-nowrap 
   px-10 
@@ -13,7 +14,7 @@ function Nav(props) {
   sm:space-x-20
   `;
 
-  const genreClassNames = `
+  const genreStyles = `
   flex-shrink-0 
   hover:scale-125 
   hover:text-white 
@@ -31,11 +32,16 @@ function Nav(props) {
   from-[#06202A]
   `;
 
+  const router = useRouter();
+
   return (
     <nav className="relative">
-      <div className={navClassNames}>
+      <div className={navStyles}>
         {Object.entries(requests).map(([key, { title, url }]) => (
-          <h2 className={genreClassNames} key={key}>
+          <h2
+            className={genreStyles}
+            key={key}
+            onClick={() => router.push(`/?genre=${key}`)}>
             {title}
           </h2>
         ))}

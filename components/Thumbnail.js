@@ -2,11 +2,12 @@ import Image from "next/image";
 import { ThumbUpIcon } from "@heroicons/react/outline";
 
 function Thumbnail({ movie }) {
-  const baseURL = "https://image.tmdb.org/t/p/w500/";
+  const baseURL = "https://image.tmdb.org/t/p/original/";
 
   //api values
   const {
     poster_path,
+    backdrop_path,
     overview,
     name,
     title,
@@ -22,9 +23,9 @@ function Thumbnail({ movie }) {
   const containerStyles = `
     group
     hover:cursor-pointer
-    hover:scale-110
+    sm:hover:scale-110
     transition-all
-    duration-100
+    duration-200
   `;
 
   const movieNameStyles = `
@@ -45,12 +46,14 @@ function Thumbnail({ movie }) {
   //Handle API Inconsitencies
   const nameOfContent = name || title;
   const releaseDate = first_air_date || release_date;
+  const imagePath =
+    `${baseURL}${backdrop_path || poster_path}` || `${baseURL}${poster_path}`;
 
   return (
     <div className={`${containerLayout} ${containerStyles}`}>
       <figure>
         <Image
-          src={`${baseURL}${poster_path}`}
+          src={imagePath}
           layout="responsive"
           width={1920}
           height={1080}

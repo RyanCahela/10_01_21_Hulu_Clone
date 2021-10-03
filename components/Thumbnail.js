@@ -1,8 +1,13 @@
+import { useState } from "react";
+
 import Image from "next/image";
 import { ThumbUpIcon } from "@heroicons/react/outline";
+import { ThumbUpIcon as ThumbUpIconSolid } from "@heroicons/react/solid";
 
 function Thumbnail({ movie }) {
   const baseURL = "https://image.tmdb.org/t/p/original/";
+  const [isLiked, setIsLiked] = useState(false);
+  const [voteCount, setVoteCount] = useState(movie.vote_count);
 
   //api values
   const {
@@ -13,7 +18,6 @@ function Thumbnail({ movie }) {
     title,
     first_air_date,
     release_date,
-    vote_count,
   } = movie;
 
   //Tailwind Styles
@@ -43,6 +47,17 @@ function Thumbnail({ movie }) {
     flex
   `;
 
+  const thumbIconStyles = `
+  inline-block w-4 mr-1
+  `;
+
+  //click handlers
+  function handleThumbUpClick() {
+    if (isLiked) return;
+    setIsLiked(true);
+    setVoteCount(voteCount + 1);
+  }
+
   //Handle API Inconsitencies
   const nameOfContent = name || title;
   const releaseDate = first_air_date || release_date;
@@ -64,8 +79,15 @@ function Thumbnail({ movie }) {
       <h2 className={`${movieNameStyles}`}>{nameOfContent}</h2>
       <div className={`${movieDetailsLayout} ${movieDetailsStyles}`}>
         <p className="mr-4">{releaseDate}</p>
-        <ThumbUpIcon className="inline-block w-4 mr-1" />
-        <p>{vote_count}</p>
+        {isLiked ? (
+          <ThumbUpIconSolid className={thumbIconStyles} />
+        ) : (
+          <ThumbUpIcon
+            className={thumbIconStyles}
+            onClick={() => handleThumbUpClick()}
+          />
+        )}
+        <p>{voteCount}</p>
       </div>
     </div>
   );

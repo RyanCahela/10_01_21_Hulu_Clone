@@ -13,7 +13,9 @@ function Gallery({ movieData }) {
 
   ${/* Desktop */ ""}
   md:grid-cols-3
-  lg:grid-cols-4 
+  md:px-12
+  lg:grid-cols-4
+  xl:grid-cols-5
   `;
 
   return (

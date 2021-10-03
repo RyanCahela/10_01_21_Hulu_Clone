@@ -6,7 +6,7 @@ function Nav(props) {
   flex 
   flex-nowrap 
   px-10
-  pb-6 
+  pb-10 
   space-x-10
   overflow-x-scroll
   scrollbar-hide

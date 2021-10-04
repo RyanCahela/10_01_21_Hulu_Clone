@@ -1,10 +1,10 @@
-import { useState } from "react";
-
+import { useState, forwardRef } from "react";
 import Image from "next/image";
-import { ThumbUpIcon } from "@heroicons/react/outline";
+import { ThumbUpIcon as ThumbUpIconOutline } from "@heroicons/react/outline";
 import { ThumbUpIcon as ThumbUpIconSolid } from "@heroicons/react/solid";
 
-function Thumbnail({ movie }) {
+//forward ref to create AnimatedThumbnail component in Gallery parent
+const Thumbnail = forwardRef(({ movie }, ref) => {
   const baseURL = "https://image.tmdb.org/t/p/original/";
   const [isLiked, setIsLiked] = useState(false);
   const [voteCount, setVoteCount] = useState(movie.vote_count);
@@ -65,7 +65,7 @@ function Thumbnail({ movie }) {
     `${baseURL}${backdrop_path || poster_path}` || `${baseURL}${poster_path}`;
 
   return (
-    <div className={`${containerLayout} ${containerStyles}`}>
+    <div ref={ref} className={`${containerLayout} ${containerStyles}`}>
       <figure>
         <Image
           src={imagePath}
@@ -82,7 +82,7 @@ function Thumbnail({ movie }) {
         {isLiked ? (
           <ThumbUpIconSolid className={thumbIconStyles} />
         ) : (
-          <ThumbUpIcon
+          <ThumbUpIconOutline
             className={thumbIconStyles}
             onClick={() => handleThumbUpClick()}
           />
@@ -91,6 +91,8 @@ function Thumbnail({ movie }) {
       </div>
     </div>
   );
-}
+});
+
+Thumbnail.displayName = "Thumbnail";
 
 export default Thumbnail;

@@ -1,4 +1,5 @@
 import Thumbnail from "./Thumbnail";
+import { AnimatePresence, motion } from "framer-motion";
 
 function Gallery({ movieData }) {
   const layoutStyles = `
@@ -16,12 +17,47 @@ function Gallery({ movieData }) {
   xl:grid-cols-4
   `;
 
+  //Page load animation values
+  const listAnimation = {
+    visible: {
+      transition: {
+        staggerChildren: 1,
+      },
+    },
+    hidden: {},
+  };
+
+  const thumbnailAnimation = {
+    visible: {
+      opacity: 1,
+    },
+    hidden: {
+      opacity: 0,
+    },
+    exit: {
+      opacity: 0,
+    },
+  };
+
+  const AnimatedThumbnail = motion(Thumbnail);
   return (
-    <div className={`${layoutStyles}`}>
-      {movieData.map((movie) => {
-        return <Thumbnail movie={movie} key={movie.id} />;
-      })}
-    </div>
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={listAnimation}
+      className={`${layoutStyles}`}>
+      <AnimatePresence>
+        {movieData.map((movie) => {
+          return (
+            <AnimatedThumbnail
+              movie={movie}
+              key={movie.id}
+              variants={thumbnailAnimation}
+            />
+          );
+        })}
+      </AnimatePresence>
+    </motion.div>
   );
 }
 

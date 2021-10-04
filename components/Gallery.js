@@ -1,7 +1,9 @@
 import Thumbnail from "./Thumbnail";
 import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 function Gallery({ movieData }) {
+  const router = useRouter();
   const layoutStyles = `
   ${/* Mobile */ ""}
   px-4
@@ -20,16 +22,10 @@ function Gallery({ movieData }) {
   //Page load animation values
   const listAnimation = {
     visible: {
-      transition: {
-        staggerChildren: 1,
-      },
-    },
-    hidden: {},
-  };
-
-  const thumbnailAnimation = {
-    visible: {
       opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
     },
     hidden: {
       opacity: 0,
@@ -39,25 +35,35 @@ function Gallery({ movieData }) {
     },
   };
 
-  const AnimatedThumbnail = motion(Thumbnail);
+  const thumbnailAnimation = {
+    visible: {
+      opacity: 1,
+    },
+    hidden: {
+      opacity: 0,
+    },
+  };
+
   return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={listAnimation}
-      className={`${layoutStyles}`}>
-      <AnimatePresence>
+    <AnimatePresence>
+      <motion.div
+        key={router.query.genre}
+        initial="hidden"
+        animate="visible"
+        variants={listAnimation}
+        className={`${layoutStyles}`}>
         {movieData.map((movie) => {
           return (
-            <AnimatedThumbnail
-              movie={movie}
+            <motion.div
               key={movie.id}
               variants={thumbnailAnimation}
-            />
+              exit={{ opacity: 0 }}>
+              <Thumbnail movie={movie} />
+            </motion.div>
           );
         })}
-      </AnimatePresence>
-    </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 

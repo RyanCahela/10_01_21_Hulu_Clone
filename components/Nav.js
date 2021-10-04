@@ -18,7 +18,8 @@ function Nav(props) {
   const genreStyles = `
   flex-shrink-0 
   hover:scale-125 
-  hover:text-white 
+  hover:text-white
+  cursor-pointer
   active:text-red-500 
   last:pr-24
   `;

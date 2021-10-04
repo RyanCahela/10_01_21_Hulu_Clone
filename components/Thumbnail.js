@@ -27,7 +27,7 @@ function Thumbnail({ movie }) {
   const containerStyles = `
     group
     hover:cursor-pointer
-    sm:hover:scale-110
+    sm:hover:scale-105
     transition-all
     duration-200
   `;

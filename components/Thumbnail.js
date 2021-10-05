@@ -35,6 +35,7 @@ const Thumbnail = ({ movie }) => {
     text-white
     group-hover:font-bold
     text-2xl
+    mt-2
   `;
 
   const movieDetailsStyles = `
@@ -44,15 +45,18 @@ const Thumbnail = ({ movie }) => {
 
   const movieDetailsLayout = `
     flex
+    mt-5
+  `;
+
+  const movieDetailsTextStyles = `
+    text-lg 
   `;
 
   const thumbIconStyles = ` 
-    inline-block
-    w-5
-    mr-1
+    mr-3
     ml-auto
-
-    sm:w-5
+    w-6
+    scale-150
   `;
 
   //click handlers
@@ -80,18 +84,17 @@ const Thumbnail = ({ movie }) => {
         />
       </figure>
       <h2 className={`${movieNameStyles}`}>{nameOfContent}</h2>
-      <p className="truncate max-w-md mb-2">{overview}</p>
+      <p className="truncate max-w-md">{overview}</p>
       <div className={`${movieDetailsLayout} ${movieDetailsStyles}`}>
-        <p className="mr-4">{releaseDate}</p>
-        {isLiked ? (
-          <ThumbUpIconSolid className={thumbIconStyles} />
-        ) : (
-          <ThumbUpIconOutline
-            className={thumbIconStyles}
-            onClick={() => handleThumbUpClick()}
-          />
-        )}
-        <p>{voteCount}</p>
+        <p className={`${movieDetailsTextStyles}`}>{releaseDate}</p>
+        <div className={thumbIconStyles}>
+          {isLiked ? (
+            <ThumbUpIconSolid />
+          ) : (
+            <ThumbUpIconOutline onClick={() => handleThumbUpClick()} />
+          )}
+        </div>
+        <p className={`${movieDetailsTextStyles}`}>{voteCount}</p>
       </div>
     </div>
   );

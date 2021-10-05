@@ -30,9 +30,10 @@ export default function Home({ API_response }) {
 
 export async function getServerSideProps(context) {
   const genre = context.query.genre;
+  const baseURL = requests["baseURL"]?.url;
   const fetchURL = requests[genre]?.url || requests["fetchTrending"].url;
-  const response = await fetch(`https://api.themoviedb.org/3${fetchURL}`).then(
-    (res) => res.json()
+  const response = await fetch(`${baseURL}${fetchURL}`).then((res) =>
+    res.json()
   );
 
   return {

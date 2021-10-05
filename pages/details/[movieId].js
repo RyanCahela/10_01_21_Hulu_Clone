@@ -1,13 +1,32 @@
 import Head from "next/head";
 import Header from "../../components/Header";
-import Nav from "../../components/Nav";
+import requests from "../../utils/requests";
 
-function Details() {
+export async function getServerSideProps(context) {
+  const movieId = context.query.movieId;
+  const baseURL = requests["baseURL"]?.url;
+  const requestURL = requests["fetchMovieDetails"]?.url;
+  const API_KEY = requests["API_KEY"];
+  console.log(`${baseURL}${requestURL}${movieId}${API_KEY}`);
+  const data = await fetch(`${baseURL}${requestURL}${movieId}${API_KEY}`).then(
+    (res) => res.json()
+  );
+
+  return {
+    props: {
+      movieDetails: data,
+    },
+  };
+}
+
+function Details({ movieDetails }) {
   const containerStyles = `
   3xl:ml-auto
   3xl:mr-auto
   3xl:max-w-screen-3xl
 `;
+
+  console.log("movieDetails", movieDetails);
   return (
     <div className={containerStyles}>
       <Head>

@@ -81,10 +81,8 @@ const Thumbnail = ({ movie }) => {
     `${baseURL}${backdrop_path || poster_path}` || `${baseURL}${poster_path}`;
 
   return (
-    <Link
-      href={`details/${movie.id}`}
-      className={`${containerLayout} ${containerStyles}`}>
-      <div>
+    <div className={`${containerLayout} ${containerStyles}`}>
+      <Link href={`details/${movie.id}`}>
         <figure>
           <Image
             src={imagePath}
@@ -94,21 +92,23 @@ const Thumbnail = ({ movie }) => {
             alt={`poster for ${nameOfContent}`}
           />
         </figure>
+      </Link>
+      <Link href={`details/${movie.id}`}>
         <h2 className={`${movieNameStyles}`}>{nameOfContent}</h2>
-        <p className="truncate max-w-md">{overview}</p>
-        <div className={`${movieDetailsLayout} ${movieDetailsStyles}`}>
-          <p className={`${movieDetailsTextStyles}`}>{releaseDate}</p>
-          <div className={thumbIconStyles}>
-            {isLiked ? (
-              <ThumbUpIconSolid />
-            ) : (
-              <ThumbUpIconOutline onClick={() => handleThumbUpClick()} />
-            )}
-          </div>
-          <p className={`${movieDetailsTextStyles}`}>{voteCount}</p>
+      </Link>
+      <p className="truncate max-w-md">{overview}</p>
+      <div className={`${movieDetailsLayout} ${movieDetailsStyles}`}>
+        <p className={`${movieDetailsTextStyles}`}>{releaseDate}</p>
+        <div className={thumbIconStyles}>
+          {isLiked ? (
+            <ThumbUpIconSolid />
+          ) : (
+            <ThumbUpIconOutline onClick={(e) => handleThumbUpClick()} />
+          )}
         </div>
+        <p className={`${movieDetailsTextStyles}`}>{voteCount}</p>
       </div>
-    </Link>
+    </div>
   );
 };
 

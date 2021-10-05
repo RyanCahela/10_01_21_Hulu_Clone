@@ -35,6 +35,7 @@ const Thumbnail = ({ movie }) => {
     text-white
     group-hover:font-bold
     text-2xl
+    truncate
     mt-2
   `;
 

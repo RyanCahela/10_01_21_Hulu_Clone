@@ -7,10 +7,12 @@ function Gallery({ movieData }) {
   const layoutStyles = `
   ${/* Mobile */ ""}
   px-4
-  gap-6
+  space-y-10
 
+  
   ${/* Tablet */ ""} 
   sm:grid
+  sm:gap-6
 
   ${/* Desktop */ ""}
   md:grid-cols-2

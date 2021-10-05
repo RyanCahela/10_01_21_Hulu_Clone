@@ -38,16 +38,21 @@ const Thumbnail = ({ movie }) => {
   `;
 
   const movieDetailsStyles = `
-  opacity-0
-  group-hover:opacity-100
+    md:opacity-0
+    md:group-hover:opacity-100
   `;
 
   const movieDetailsLayout = `
     flex
   `;
 
-  const thumbIconStyles = `
-  inline-block w-4 mr-1
+  const thumbIconStyles = ` 
+    inline-block
+    w-5
+    mr-1
+    ml-auto
+
+    sm:w-5
   `;
 
   //click handlers
@@ -73,9 +78,9 @@ const Thumbnail = ({ movie }) => {
           height={1080}
           alt={`poster for ${nameOfContent}`}
         />
-        <figcaption className="truncate max-w-md">{overview}</figcaption>
       </figure>
       <h2 className={`${movieNameStyles}`}>{nameOfContent}</h2>
+      <p className="truncate max-w-md mb-2">{overview}</p>
       <div className={`${movieDetailsLayout} ${movieDetailsStyles}`}>
         <p className="mr-4">{releaseDate}</p>
         {isLiked ? (

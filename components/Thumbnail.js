@@ -46,10 +46,13 @@ const Thumbnail = ({ movie }) => {
   const movieDetailsLayout = `
     flex
     mt-5
+
+    md:mt-0
   `;
 
   const movieDetailsTextStyles = `
-    text-lg 
+    text-lg
+    md:text-base 
   `;
 
   const thumbIconStyles = ` 
@@ -57,6 +60,10 @@ const Thumbnail = ({ movie }) => {
     ml-auto
     w-6
     scale-150
+
+    sm:scale-125
+
+    md:scale-100
   `;
 
   //click handlers

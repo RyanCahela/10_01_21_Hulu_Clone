@@ -1,12 +1,15 @@
 import { useState, forwardRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ThumbUpIcon as ThumbUpIconOutline } from "@heroicons/react/outline";
 import { ThumbUpIcon as ThumbUpIconSolid } from "@heroicons/react/solid";
+import { useRouter } from "next/router";
 
 const Thumbnail = ({ movie }) => {
   const baseURL = "https://image.tmdb.org/t/p/original/";
   const [isLiked, setIsLiked] = useState(false);
   const [voteCount, setVoteCount] = useState(movie.vote_count);
+  const router = useRouter();
 
   //api values
   const {
@@ -47,7 +50,6 @@ const Thumbnail = ({ movie }) => {
   const movieDetailsLayout = `
     flex
     mt-5
-
     md:mt-0
   `;
 
@@ -61,9 +63,7 @@ const Thumbnail = ({ movie }) => {
     ml-auto
     w-6
     scale-150
-
     sm:scale-125
-
     md:scale-100
   `;
 
@@ -81,30 +81,34 @@ const Thumbnail = ({ movie }) => {
     `${baseURL}${backdrop_path || poster_path}` || `${baseURL}${poster_path}`;
 
   return (
-    <div className={`${containerLayout} ${containerStyles}`}>
-      <figure>
-        <Image
-          src={imagePath}
-          layout="responsive"
-          width={1920}
-          height={1080}
-          alt={`poster for ${nameOfContent}`}
-        />
-      </figure>
-      <h2 className={`${movieNameStyles}`}>{nameOfContent}</h2>
-      <p className="truncate max-w-md">{overview}</p>
-      <div className={`${movieDetailsLayout} ${movieDetailsStyles}`}>
-        <p className={`${movieDetailsTextStyles}`}>{releaseDate}</p>
-        <div className={thumbIconStyles}>
-          {isLiked ? (
-            <ThumbUpIconSolid />
-          ) : (
-            <ThumbUpIconOutline onClick={() => handleThumbUpClick()} />
-          )}
+    <Link
+      href={`details/${movie.id}`}
+      className={`${containerLayout} ${containerStyles}`}>
+      <div>
+        <figure>
+          <Image
+            src={imagePath}
+            layout="responsive"
+            width={1920}
+            height={1080}
+            alt={`poster for ${nameOfContent}`}
+          />
+        </figure>
+        <h2 className={`${movieNameStyles}`}>{nameOfContent}</h2>
+        <p className="truncate max-w-md">{overview}</p>
+        <div className={`${movieDetailsLayout} ${movieDetailsStyles}`}>
+          <p className={`${movieDetailsTextStyles}`}>{releaseDate}</p>
+          <div className={thumbIconStyles}>
+            {isLiked ? (
+              <ThumbUpIconSolid />
+            ) : (
+              <ThumbUpIconOutline onClick={() => handleThumbUpClick()} />
+            )}
+          </div>
+          <p className={`${movieDetailsTextStyles}`}>{voteCount}</p>
         </div>
-        <p className={`${movieDetailsTextStyles}`}>{voteCount}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

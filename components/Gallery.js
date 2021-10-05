@@ -13,6 +13,7 @@ function Gallery({ movieData }) {
   ${/* Tablet */ ""} 
   sm:grid
   sm:gap-6
+  sm:space-y-0
 
   ${/* Desktop */ ""}
   md:grid-cols-2

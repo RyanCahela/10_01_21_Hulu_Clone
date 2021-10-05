@@ -1,15 +1,10 @@
-import { useState, forwardRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ThumbUpIcon as ThumbUpIconOutline } from "@heroicons/react/outline";
-import { ThumbUpIcon as ThumbUpIconSolid } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
+import LikeCounter from "../components/LikeCounter";
 
 const Thumbnail = ({ movie }) => {
   const baseURL = "https://image.tmdb.org/t/p/original/";
-  const [isLiked, setIsLiked] = useState(false);
-  const [voteCount, setVoteCount] = useState(movie.vote_count);
-  const router = useRouter();
 
   //api values
   const {
@@ -58,22 +53,6 @@ const Thumbnail = ({ movie }) => {
     md:text-base 
   `;
 
-  const thumbIconStyles = ` 
-    mr-3
-    ml-auto
-    w-6
-    scale-150
-    sm:scale-125
-    md:scale-100
-  `;
-
-  //click handlers
-  function handleThumbUpClick() {
-    if (isLiked) return;
-    setIsLiked(true);
-    setVoteCount(voteCount + 1);
-  }
-
   //Handle API Inconsitencies
   const nameOfContent = name || title;
   const releaseDate = first_air_date || release_date;
@@ -99,14 +78,7 @@ const Thumbnail = ({ movie }) => {
       <p className="truncate max-w-md">{overview}</p>
       <div className={`${movieDetailsLayout} ${movieDetailsStyles}`}>
         <p className={`${movieDetailsTextStyles}`}>{releaseDate}</p>
-        <div className={thumbIconStyles}>
-          {isLiked ? (
-            <ThumbUpIconSolid />
-          ) : (
-            <ThumbUpIconOutline onClick={(e) => handleThumbUpClick()} />
-          )}
-        </div>
-        <p className={`${movieDetailsTextStyles}`}>{voteCount}</p>
+        <LikeCounter initialVoteCount={movie.vote_count} />
       </div>
     </div>
   );

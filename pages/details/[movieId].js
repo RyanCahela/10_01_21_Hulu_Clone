@@ -3,9 +3,14 @@ import Image from "next/image";
 
 export async function getServerSideProps(context) {
   const movieId = context.query.movieId;
+  const mediaType = context.query["media-type"];
   const { movieDatabaseURL, apiKeyQueryString } = requests.apiValues;
-  const requestURL = requests["fetchMovieDetails"]?.url;
-  console.log(`${movieDatabaseURL}${requestURL}${movieId}${apiKeyQueryString}`);
+  //there are different api enpoints for movies and tv shows
+  const requestURL =
+    mediaType === "movie"
+      ? requests["fetchMovieDetails"]?.url
+      : requests["fetchTVDetails"]?.url;
+
   const data = await fetch(
     `${movieDatabaseURL}${requestURL}/${movieId}${apiKeyQueryString}`
   ).then((res) => res.json());
@@ -18,6 +23,7 @@ export async function getServerSideProps(context) {
 }
 
 function Details({ movieDetails }) {
+  console.log("movieDetails", movieDetails);
   const { imageBaseURL } = requests.apiValues;
   const {
     backdrop_path,

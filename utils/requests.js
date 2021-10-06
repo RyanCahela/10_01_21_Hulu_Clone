@@ -46,7 +46,10 @@ const requests = {
     url: `/discover/movie?api_key=${API_KEY}&with_genres=10770`,
   },
   fetchMovieDetails: {
-    url: `/movie`,
+    url: "/movie",
+  },
+  fetchTVDetails: {
+    url: "/tv",
   },
   apiValues: {
     imageBaseURL: "https://image.tmdb.org/t/p/original/",

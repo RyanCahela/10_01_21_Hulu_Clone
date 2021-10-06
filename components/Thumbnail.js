@@ -1,4 +1,5 @@
 import Image from "next/image";
+import link from "next/link";
 import Link from "next/link";
 import LikeCounter from "../components/LikeCounter";
 import requests from "../utils/requests";
@@ -57,10 +58,13 @@ const Thumbnail = ({ movie }) => {
   const nameOfContent = name || title;
   const releaseDate = first_air_date || release_date;
   const imagePath = `${imageBaseURL}${backdrop_path || poster_path}`;
+  const linkHref = `details/${movie.id}?media-type=${movie.media_type}`;
+  console.log("movie", movie);
+  console.log("linkHref", linkHref);
 
   return (
     <div className={`${containerLayout} ${containerStyles}`}>
-      <Link href={`details/${movie.id}`}>
+      <Link href={linkHref}>
         <figure>
           <Image
             src={imagePath}
@@ -71,7 +75,7 @@ const Thumbnail = ({ movie }) => {
           />
         </figure>
       </Link>
-      <Link href={`details/${movie.id}`}>
+      <Link href={linkHref}>
         <h2 className={`${movieNameStyles}`}>{nameOfContent}</h2>
       </Link>
       <p className="truncate max-w-md">{overview}</p>

@@ -4,6 +4,9 @@ import Head from "next/head";
 
 function Layout({ children }) {
   const containerStyles = `
+  p-4
+
+
   3xl:ml-auto
   3xl:mr-auto
   3xl:max-w-screen-3xl

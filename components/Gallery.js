@@ -6,9 +6,7 @@ function Gallery({ movieData }) {
   const router = useRouter();
   const layoutStyles = `
   ${/* Mobile */ ""}
-  px-4
   space-y-10
-
   
   ${/* Tablet */ ""} 
   sm:grid

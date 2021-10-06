@@ -19,7 +19,7 @@ function Layout({ children }) {
       <div className={containerStyles}>
         <Header />
         <Nav />
-        <main>{children}</main>;
+        <main>{children}</main>
       </div>
     </>
   );

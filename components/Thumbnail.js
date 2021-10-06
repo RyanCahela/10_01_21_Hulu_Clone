@@ -59,8 +59,6 @@ const Thumbnail = ({ movie }) => {
   const releaseDate = first_air_date || release_date;
   const imagePath = `${imageBaseURL}${backdrop_path || poster_path}`;
   const linkHref = `details/${movie.id}?media-type=${movie.media_type}`;
-  console.log("movie", movie);
-  console.log("linkHref", linkHref);
 
   return (
     <div className={`${containerLayout} ${containerStyles}`}>

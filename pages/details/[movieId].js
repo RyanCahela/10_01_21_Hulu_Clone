@@ -23,15 +23,16 @@ export async function getServerSideProps(context) {
 }
 
 function Details({ movieDetails }) {
-  console.log("movieDetails", movieDetails);
   const { imageBaseURL } = requests.apiValues;
+  console.log("movieDetails", movieDetails);
   const {
     backdrop_path,
     homepage,
-    original_title,
+    original_name,
     overview,
     poster_path,
     release_date,
+    first_air_date,
     revenue,
     title,
     vote_average,
@@ -42,14 +43,31 @@ function Details({ movieDetails }) {
     tagline,
   } = movieDetails;
 
+  const containerLayout = `
+    flex
+    flex-col
+  `;
+
   //handle Api inconcistencies
   const posterURL = `${imageBaseURL}${poster_path || backdrop_path}`;
-  const movieTitle = title || original_title;
+  const movieTitle = title || original_name;
+  const releaseDate = release_date || first_air_date;
+
+  const releaseYear = releaseDate.slice(0, 4);
 
   return (
-    <div className="grid">
-      <h2>{movieTitle}</h2>
-      <Image src={posterURL} height={1080} width={1920} layout="responsive" />
+    <div className={containerLayout}>
+      <div className="">
+        <Image src={posterURL} height={400} width={300} layout="responsive" />
+      </div>
+      <h2 className="text-white text-2xl">
+        {movieTitle}
+        <span className="font-thin ml-2">{`(${releaseYear})`}</span>
+      </h2>
+      <p className="italic mb-3">{tagline}</p>
+      <p className="mb-3">{overview}</p>
+      <p>Original Air Date: {releaseDate}</p>
+      <p>User Rating: {vote_average}</p>
     </div>
   );
 }

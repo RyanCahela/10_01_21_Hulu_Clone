@@ -1,9 +1,10 @@
 import requests from "../../utils/requests";
 import Image from "next/image";
+import ImageNotFound from "../../components/ImageNotFound";
 
 export async function getServerSideProps(context) {
   const movieId = context.query.movieId;
-  const mediaType = context.query["media-type"];
+  const mediaType = context.query["media-type"] || "movie";
   const { movieDatabaseURL, apiKeyQueryString } = requests.apiValues;
   //there are different api enpoints for movies and tv shows
   const requestURL =
@@ -58,17 +59,23 @@ function Details({ movieDetails }) {
   const movieTitle = name || original_name;
   const releaseDate = release_date || first_air_date;
 
-  const releaseYear = releaseDate.slice(0, 4);
+  const releaseYear = releaseDate?.slice(0, 4);
 
   return (
     <div className={containerLayout}>
       <div className="">
-        <Image src={posterURL} height={400} width={300} layout="responsive" />
+        {!posterURL.includes("null") ? (
+          <Image src={posterURL} height={400} width={300} layout="responsive" />
+        ) : (
+          <ImageNotFound />
+        )}
       </div>
       <div>
         <h2 className="text-white text-2xl">
           {movieTitle}
-          <span className="font-thin ml-2">{`(${releaseYear})`}</span>
+          <span className="font-thin ml-2">
+            {releaseYear ? `(${releaseYear})` : ""}
+          </span>
         </h2>
         <p className="italic mb-3">{tagline}</p>
         <p className="mb-3">{overview}</p>

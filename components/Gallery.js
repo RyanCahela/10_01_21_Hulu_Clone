@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 
 function Gallery({ movieData }) {
+  console.log("movieData", movieData);
   const router = useRouter();
   const layoutStyles = `
   ${/* Mobile */ ""}

@@ -46,6 +46,11 @@ function Details({ movieDetails }) {
   const containerLayout = `
     flex
     flex-col
+
+    sm:grid
+    sm:grid-cols-2
+    sm:gap-4
+    sm:p-4
   `;
 
   //handle Api inconcistencies
@@ -60,14 +65,16 @@ function Details({ movieDetails }) {
       <div className="">
         <Image src={posterURL} height={400} width={300} layout="responsive" />
       </div>
-      <h2 className="text-white text-2xl">
-        {movieTitle}
-        <span className="font-thin ml-2">{`(${releaseYear})`}</span>
-      </h2>
-      <p className="italic mb-3">{tagline}</p>
-      <p className="mb-3">{overview}</p>
-      <p>Original Air Date: {releaseDate}</p>
-      <p>User Rating: {vote_average}</p>
+      <div>
+        <h2 className="text-white text-2xl">
+          {movieTitle}
+          <span className="font-thin ml-2">{`(${releaseYear})`}</span>
+        </h2>
+        <p className="italic mb-3">{tagline}</p>
+        <p className="mb-3">{overview}</p>
+        <p>Original Air Date: {releaseDate}</p>
+        <p>User Rating: {vote_average}</p>
+      </div>
     </div>
   );
 }

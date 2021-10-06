@@ -1,9 +1,6 @@
 const API_KEY = process.env.API_KEY;
 
 const requests = {
-  baseURL: {
-    url: `https://api.themoviedb.org/3`,
-  },
   fetchTrending: {
     title: "Trending",
     url: `/trending/all/week?api_key=${API_KEY}&language=en-US`,
@@ -49,9 +46,13 @@ const requests = {
     url: `/discover/movie?api_key=${API_KEY}&with_genres=10770`,
   },
   fetchMovieDetails: {
-    url: `/movie/`,
+    url: `/movie`,
   },
-  API_KEY: `?api_key=${API_KEY}`,
+  apiValues: {
+    imageBaseURL: "https://image.tmdb.org/t/p/original/",
+    movieDatabaseURL: `https://api.themoviedb.org/3`,
+    apiKeyQueryString: `?api_key=${API_KEY}`,
+  },
 };
 
 export default requests;

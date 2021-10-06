@@ -1,17 +1,14 @@
-import Head from "next/head";
-import Header from "../../components/Header";
 import requests from "../../utils/requests";
 import Image from "next/image";
 
 export async function getServerSideProps(context) {
   const movieId = context.query.movieId;
-  const baseURL = requests["baseURL"]?.url;
+  const { movieDatabaseURL, apiKeyQueryString } = requests.apiValues;
   const requestURL = requests["fetchMovieDetails"]?.url;
-  const API_KEY = requests["API_KEY"];
-  console.log(`${baseURL}${requestURL}${movieId}${API_KEY}`);
-  const data = await fetch(`${baseURL}${requestURL}${movieId}${API_KEY}`).then(
-    (res) => res.json()
-  );
+  console.log(`${movieDatabaseURL}${requestURL}${movieId}${apiKeyQueryString}`);
+  const data = await fetch(
+    `${movieDatabaseURL}${requestURL}/${movieId}${apiKeyQueryString}`
+  ).then((res) => res.json());
 
   return {
     props: {
@@ -21,7 +18,7 @@ export async function getServerSideProps(context) {
 }
 
 function Details({ movieDetails }) {
-  const baseURL = "https://image.tmdb.org/t/p/original/";
+  const { imageBaseURL } = requests.apiValues;
   const {
     backdrop_path,
     homepage,
@@ -40,10 +37,9 @@ function Details({ movieDetails }) {
   } = movieDetails;
 
   //handle Api inconcistencies
-  const posterURL = `${baseURL}${poster_path || backdrop_path}`;
+  const posterURL = `${imageBaseURL}${poster_path || backdrop_path}`;
   const movieTitle = title || original_title;
 
-  console.log("movieDetails", movieDetails);
   return (
     <div className="grid">
       <h2>{movieTitle}</h2>

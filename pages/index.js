@@ -8,9 +8,9 @@ export default function Home({ API_response }) {
 
 export async function getServerSideProps(context) {
   const genre = context.query.genre;
-  const baseURL = requests["baseURL"]?.url;
+  const { movieDatabaseURL } = requests.apiValues;
   const fetchURL = requests[genre]?.url || requests["fetchTrending"].url;
-  const response = await fetch(`${baseURL}${fetchURL}`).then((res) =>
+  const response = await fetch(`${movieDatabaseURL}${fetchURL}`).then((res) =>
     res.json()
   );
 

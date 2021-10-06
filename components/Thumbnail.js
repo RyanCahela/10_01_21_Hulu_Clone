@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import LikeCounter from "../components/LikeCounter";
+import requests from "../utils/requests";
 
 const Thumbnail = ({ movie }) => {
-  const baseURL = "https://image.tmdb.org/t/p/original/";
+  const { imageBaseURL } = requests.apiValues;
 
   //api values
   const {
@@ -56,8 +56,7 @@ const Thumbnail = ({ movie }) => {
   //Handle API Inconsitencies
   const nameOfContent = name || title;
   const releaseDate = first_air_date || release_date;
-  const imagePath =
-    `${baseURL}${backdrop_path || poster_path}` || `${baseURL}${poster_path}`;
+  const imagePath = `${imageBaseURL}${backdrop_path || poster_path}`;
 
   return (
     <div className={`${containerLayout} ${containerStyles}`}>

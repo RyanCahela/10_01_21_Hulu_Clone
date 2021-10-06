@@ -34,7 +34,7 @@ function Details({ movieDetails }) {
     release_date,
     first_air_date,
     revenue,
-    title,
+    name,
     vote_average,
     voteCount,
     runtime,
@@ -55,7 +55,7 @@ function Details({ movieDetails }) {
 
   //handle Api inconcistencies
   const posterURL = `${imageBaseURL}${poster_path || backdrop_path}`;
-  const movieTitle = title || original_name;
+  const movieTitle = name || original_name;
   const releaseDate = release_date || first_air_date;
 
   const releaseYear = releaseDate.slice(0, 4);

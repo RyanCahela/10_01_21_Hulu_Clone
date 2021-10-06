@@ -1,8 +1,12 @@
 import "../styles/globals.css";
-import { motion } from "framer-motion";
+import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <Layout>
+      <Component {...pageProps} />;
+    </Layout>
+  );
 }
 
 export default MyApp;

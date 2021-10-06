@@ -6,12 +6,10 @@ import {
   SearchIcon,
   UserIcon,
 } from "@heroicons/react/outline";
-import Nav from "./Nav";
 import HeaderItem from "./HeaderItem";
 import Image from "next/image";
 
 function Header(props) {
-  //TODO: rework css so Nav component can live inside <header>
   return (
     <div>
       <header className="flex flex-col sm:flex-row items-center p-5">
@@ -33,7 +31,6 @@ function Header(props) {
           />
         </div>
       </header>
-      <Nav />
     </div>
   );
 }

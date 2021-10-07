@@ -1,29 +1,42 @@
-import Image from "next/image";
 import requests from "../utils/requests";
-import ImageNotFound from "./ImageNotFound";
+import ProductionCompany from "./ProductionCompany";
 
 function ProductionCompanies({ productionCompanies }) {
-  const { imageBaseURL } = requests.apiValues;
+  const containerLayout = `
+    px-4
+    py-2
+    mt-4
+    col-span-full
+    lg:col-start-2
+    lg:col-end-3
+  `;
+
+  const containerStyles = `
+    bg-gray-200
+    text-gray-900 
+    rounded-sm 
+  `;
+
+  const titleLayout = `
+    mt-3 
+  `;
+
+  const titleStyles = `
+    text-xl font-bold  
+  `;
+
+  const listLayout = `
+    grid
+    grid-cols-2
+    lg:grid-cols-3
+  `;
+
   return (
-    <div className="bg-gray-200 text-gray-900 p-4">
-      <h3 className="text-xl font-bold mt-3">Production Companies</h3>
-      <ul className="flex flex-col md:flex-row md:flex-wrap md:space-x-4">
+    <div className={`${containerLayout}${containerStyles}`}>
+      <h3 className={`${titleLayout}${titleStyles}`}>Production Companies</h3>
+      <ul className={`${listLayout}`}>
         {productionCompanies.map((company) => {
-          const logoURL = company.logo_path
-            ? `${imageBaseURL}${company.logo_path}`
-            : null;
-          return (
-            <li key={company.id} className="flex flex-col">
-              <h4 className="text-sm">{company.name}</h4>
-              <div className="w-10 md:self-center hidden md:block">
-                {logoURL ? (
-                  <Image src={logoURL} width={500} height={500} />
-                ) : (
-                  <ImageNotFound color="dark" />
-                )}
-              </div>
-            </li>
-          );
+          return <ProductionCompany company={company} />;
         })}
       </ul>
     </div>

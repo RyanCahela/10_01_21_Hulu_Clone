@@ -58,6 +58,18 @@ function Details({ movieDetails }) {
     sm:grid-cols-2
     sm:gap-4
     sm:p-4
+
+    lg:grid-row-3
+  `;
+
+  const posterLayout = `
+    row-start-1 
+    row-end-2
+    mb-6
+
+    sm:mb-0
+
+    lg:row-end-3
   `;
 
   //handle Api inconcistencies
@@ -70,9 +82,15 @@ function Details({ movieDetails }) {
 
   return (
     <div className={containerLayout}>
-      <div className="">
+      <div className={posterLayout}>
         {!posterURL.includes("null") ? (
-          <Image src={posterURL} height={400} width={300} layout="responsive" />
+          <Image
+            src={posterURL}
+            alt={`poster for ${movieTitle}`}
+            height={400}
+            width={300}
+            layout="responsive"
+          />
         ) : (
           <ImageNotFound />
         )}
@@ -88,8 +106,8 @@ function Details({ movieDetails }) {
         <p className="mb-3">{overview}</p>
         <p>Original Air Date: {releaseDate}</p>
         <p>User Rating: {vote_average}</p>
-        <ProductionCompanies productionCompanies={production_companies} />
       </div>
+      <ProductionCompanies productionCompanies={production_companies} />
     </div>
   );
 }

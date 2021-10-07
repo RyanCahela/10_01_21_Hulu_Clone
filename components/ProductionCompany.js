@@ -8,7 +8,7 @@ function ProductionCompany({ company }) {
     ? `${imageBaseURL}${company.logo_path}`
     : null;
   return (
-    <li key={company.id} className="flex flex-col">
+    <li className="flex flex-col">
       <h4 className="text-sm mb-2">{company.name}</h4>
       <div className="w-10">
         {logoURL ? (

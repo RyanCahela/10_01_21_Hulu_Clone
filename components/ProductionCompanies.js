@@ -36,7 +36,7 @@ function ProductionCompanies({ productionCompanies }) {
       <h3 className={`${titleLayout}${titleStyles}`}>Production Companies</h3>
       <ul className={`${listLayout}`}>
         {productionCompanies.map((company) => {
-          return <ProductionCompany company={company} />;
+          return <ProductionCompany company={company} key={company.id} />;
         })}
       </ul>
     </div>

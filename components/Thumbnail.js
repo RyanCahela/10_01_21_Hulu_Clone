@@ -59,8 +59,8 @@ const Thumbnail = ({ movie }) => {
   const nameOfContent = name || title;
   const releaseDate = first_air_date || release_date;
   const imagePath = `${imageBaseURL}${backdrop_path || poster_path}`;
-  const mediaType =
-    router.query.genre === "fetchTopRated" ? "movie" : movie.media_type;
+  console.log("movie.media_type", movie.media_type);
+  const mediaType = movie.media_type ? movie.media_type : "movie";
   const linkHref = `details/${movie.id}?media-type=${mediaType}`;
 
   return (

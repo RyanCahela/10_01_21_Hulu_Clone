@@ -1,12 +1,15 @@
+import { useState } from "react";
 import requests from "../../utils/requests";
-import Image from "next/image";
 import ImageNotFound from "../../components/ImageNotFound";
 import ProductionCompanies from "../../components/ProductionCompanies";
+import Image from "next/image";
+import PosterImage from "../../components/PosterImage";
 import { useRouter } from "next/router";
 
 function Details({ movieDetails }) {
   const { imageBaseURL } = requests.apiValues;
   const router = useRouter();
+
   const {
     backdrop_path,
     homepage,
@@ -69,13 +72,7 @@ function Details({ movieDetails }) {
       <div className={containerLayout}>
         <div className={posterLayout}>
           {!posterURL.includes("null") ? (
-            <Image
-              src={posterURL}
-              alt={`poster for ${movieTitle}`}
-              height={400}
-              width={300}
-              layout="responsive"
-            />
+            <PosterImage posterURL={posterURL} movieTitle={movieTitle} />
           ) : (
             <ImageNotFound />
           )}

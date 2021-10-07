@@ -1,6 +1,9 @@
-function HeaderItem({ Icon, title }) {
+import router from "next/router";
+
+function HeaderItem({ Icon, title, route }) {
   return (
     <div
+      onClick={() => router.push(route || "/")}
       className={`
         flex flex-col 
         items-center 

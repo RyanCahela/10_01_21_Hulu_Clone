@@ -1,11 +1,12 @@
 import Image from "next/image";
-import link from "next/link";
 import Link from "next/link";
 import LikeCounter from "../components/LikeCounter";
 import requests from "../utils/requests";
+import { useRouter } from "next/router";
 
 const Thumbnail = ({ movie }) => {
   const { imageBaseURL } = requests.apiValues;
+  const router = useRouter();
 
   //api values
   const {
@@ -58,7 +59,9 @@ const Thumbnail = ({ movie }) => {
   const nameOfContent = name || title;
   const releaseDate = first_air_date || release_date;
   const imagePath = `${imageBaseURL}${backdrop_path || poster_path}`;
-  const linkHref = `details/${movie.id}?media-type=${movie.media_type}`;
+  const mediaType =
+    router.query.genre === "fetchTopRated" ? "movie" : movie.media_type;
+  const linkHref = `details/${movie.id}?media-type=${mediaType}`;
 
   return (
     <div className={`${containerLayout} ${containerStyles}`}>

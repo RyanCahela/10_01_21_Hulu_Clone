@@ -8,14 +8,23 @@ import {
 } from "@heroicons/react/outline";
 import HeaderItem from "./HeaderItem";
 import Image from "next/image";
+import Link from "next/link";
 
 function Header(props) {
   return (
-    <div>
+    <div onClick={() => console.log("insideClick")}>
       <header className="flex flex-col sm:flex-row items-center p-5">
         <div className="flex justify-evenly max-w-2xl">
-          <HeaderItem title="home" Icon={HomeIcon} />
-          <HeaderItem title="trending" Icon={LightningBoltIcon} />
+          <HeaderItem
+            title="home"
+            Icon={HomeIcon}
+            route="/?genre=fetchTrending"
+          />
+          <HeaderItem
+            title="trending"
+            Icon={LightningBoltIcon}
+            route="/?genre=fetchTrending"
+          />
           <HeaderItem title="verified" Icon={BadgeCheckIcon} />
           <HeaderItem title="collections" Icon={CollectionIcon} />
           <HeaderItem title="search" Icon={SearchIcon} />

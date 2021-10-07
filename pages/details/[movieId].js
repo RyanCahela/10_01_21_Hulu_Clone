@@ -4,13 +4,18 @@ import ImageNotFound from "../../components/ImageNotFound";
 
 export async function getServerSideProps(context) {
   const movieId = context.query.movieId;
-  const mediaType = context.query["media-type"] || "movie";
+  const mediaType = context.query["media-type"];
   const { movieDatabaseURL, apiKeyQueryString } = requests.apiValues;
   //there are different api enpoints for movies and tv shows
   const requestURL =
     mediaType === "movie"
       ? requests["fetchMovieDetails"]?.url
       : requests["fetchTVDetails"]?.url;
+
+  console.log(
+    "request",
+    `${movieDatabaseURL}${requestURL}/${movieId}${apiKeyQueryString}`
+  );
 
   const data = await fetch(
     `${movieDatabaseURL}${requestURL}/${movieId}${apiKeyQueryString}`
@@ -36,6 +41,7 @@ function Details({ movieDetails }) {
     first_air_date,
     revenue,
     name,
+    title,
     vote_average,
     voteCount,
     runtime,
@@ -47,7 +53,6 @@ function Details({ movieDetails }) {
   const containerLayout = `
     flex
     flex-col
-
     sm:grid
     sm:grid-cols-2
     sm:gap-4
@@ -56,9 +61,8 @@ function Details({ movieDetails }) {
 
   //handle Api inconcistencies
   const posterURL = `${imageBaseURL}${poster_path || backdrop_path}`;
-  const movieTitle = name || original_name;
+  const movieTitle = name || title || original_name;
   const releaseDate = release_date || first_air_date;
-
   const releaseYear = releaseDate?.slice(0, 4);
 
   return (

@@ -1,7 +1,11 @@
-function ImageNotFound() {
+function ImageNotFound({ color = "light" }) {
+  const outlineClass = color === "dark" ? "outline-black" : "outline-white";
+  const textColorClass = color === "dark" ? "text-black" : "text-white";
+
   return (
-    <div className="text-center outline-white px-5 py-20 mb-5">
-      Image Not Found
+    <div
+      className={`text-center text-sm ${textColorClass} ${outlineClass} w-full`}>
+      No Image
     </div>
   );
 }

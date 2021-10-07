@@ -1,6 +1,7 @@
 import requests from "../../utils/requests";
 import Image from "next/image";
 import ImageNotFound from "../../components/ImageNotFound";
+import ProductionCompanies from "../../components/ProductionCompanies";
 
 export async function getServerSideProps(context) {
   const movieId = context.query.movieId;
@@ -65,6 +66,8 @@ function Details({ movieDetails }) {
   const releaseDate = release_date || first_air_date;
   const releaseYear = releaseDate?.slice(0, 4);
 
+  console.log("production companies", production_companies);
+
   return (
     <div className={containerLayout}>
       <div className="">
@@ -85,6 +88,7 @@ function Details({ movieDetails }) {
         <p className="mb-3">{overview}</p>
         <p>Original Air Date: {releaseDate}</p>
         <p>User Rating: {vote_average}</p>
+        <ProductionCompanies productionCompanies={production_companies} />
       </div>
     </div>
   );

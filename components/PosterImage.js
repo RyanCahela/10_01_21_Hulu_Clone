@@ -6,11 +6,10 @@ function PosterImage({ posterURL, movieTitle }) {
 
   console.log("isPosterLoaded", isPosterLoaded);
 
-  const loaderStyles = `
-    loader
+  const loaderContainerStyles = `
     top-1/2
     left-1/2 
-    relative
+    absolute
     z-10 
     -translate-y-1/2
     -translate-x-1/2
@@ -30,7 +29,7 @@ function PosterImage({ posterURL, movieTitle }) {
       {isPosterLoaded ? (
         ""
       ) : (
-        <div className="z-10 top-1/2 left-1/2 absolute -translate-x-1/2 -translate-y-1/2">
+        <div className={loaderContainerStyles}>
           <div className="loader"></div>
         </div>
       )}

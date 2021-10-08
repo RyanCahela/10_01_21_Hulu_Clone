@@ -5,6 +5,7 @@ import ProductionCompanies from "../../components/ProductionCompanies";
 import Image from "next/image";
 import PosterImage from "../../components/PosterImage";
 import { useRouter } from "next/router";
+import { ArrowCircleLeftIcon } from "@heroicons/react/outline";
 
 function Details({ movieDetails }) {
   const { imageBaseURL } = requests.apiValues;
@@ -43,19 +44,18 @@ function Details({ movieDetails }) {
     row-start-1 
     row-end-2
     mb-6
-
     sm:mb-0
-
     lg:row-end-3
   `;
 
-  const backButtonStyles = `
+  const backButtonContainerStyles = `
     text-2xl
     mb-4
     sm:p-4 
     hover:font-bold
-    hover:underline
     cursor-pointer
+    flex
+    group
   `;
 
   //handle Api inconcistencies
@@ -66,8 +66,11 @@ function Details({ movieDetails }) {
 
   return (
     <>
-      <div className={backButtonStyles} onClick={() => router.back()}>
-        &lt; Go Back
+      <div className={backButtonContainerStyles} onClick={() => router.back()}>
+        <ArrowCircleLeftIcon
+          className={"h-100 w-5 mr-3 group-hover:scale-110"}
+        />{" "}
+        <span>Back</span>
       </div>
       <div className={containerLayout}>
         <div className={posterLayout}>

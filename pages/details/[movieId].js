@@ -56,6 +56,7 @@ function Details({ movieDetails }) {
     cursor-pointer
     flex
     group
+    w-max
   `;
 
   //handle Api inconcistencies
@@ -67,8 +68,8 @@ function Details({ movieDetails }) {
   return (
     <>
       <div className={backButtonContainerStyles} onClick={() => router.back()}>
-        <div className={"w-10 mr-3 group-hover:scale-110"}>
-          <ArrowCircleLeftIcon />{" "}
+        <div className={"w-10 mr-3 hover:scale-110"}>
+          <ArrowCircleLeftIcon />
         </div>
         <div>Back</div>
       </div>

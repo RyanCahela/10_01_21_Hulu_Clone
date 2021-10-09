@@ -67,8 +67,10 @@ function Details({ movieDetails }) {
   return (
     <>
       <div className={backButtonContainerStyles} onClick={() => router.back()}>
-        <ArrowCircleLeftIcon className={"w-5 mr-3 group-hover:scale-110"} />{" "}
-        <span>Back</span>
+        <div className={"w-10 mr-3 group-hover:scale-110"}>
+          <ArrowCircleLeftIcon />{" "}
+        </div>
+        <div>Back</div>
       </div>
       <div className={containerLayout}>
         <div className={posterLayout}>
